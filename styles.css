@@ -1,0 +1,101 @@
+/* ==========================================================================
+   自定义文件排序 / Custom File Order
+   ========================================================================== */
+
+/* --- 拖拽手柄 ------------------------------------------------------------ */
+
+.nav-file-title > .cfo-grip,
+.nav-folder-title > .cfo-grip {
+  /* 折叠箭头是 position:absolute 且带负 margin，会盖住标题左侧；
+     手柄必须自身定位并抬高层级，否则点在文件夹行上会被箭头吃掉（表现为「拖不动」）。 */
+  position: relative;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-inline-start: -2px;
+  margin-inline-end: 3px;
+  border-radius: var(--radius-s, 4px);
+  color: var(--text-faint);
+  opacity: 0.45;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: opacity 80ms ease-in-out, background-color 80ms ease-in-out;
+}
+
+/* 文件夹行左侧要让出折叠箭头的位置，避免两个热区贴着 */
+.nav-folder-title > .cfo-grip {
+  margin-inline-start: 2px;
+}
+
+.nav-file-title:hover > .cfo-grip,
+.nav-folder-title:hover > .cfo-grip,
+.cfo-grip.cfo-grip-active {
+  opacity: 1;
+}
+
+.cfo-grip:hover {
+  color: var(--text-normal);
+  background-color: var(--background-modifier-hover);
+}
+
+.cfo-grip:active {
+  cursor: grabbing;
+}
+
+.cfo-grip svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* 触摸设备没有 hover，始终显示手柄 */
+@media (hover: none) {
+  .nav-file-title > .cfo-grip,
+  .nav-folder-title > .cfo-grip {
+    opacity: 0.7;
+  }
+}
+
+/* --- 拖拽过程中的视觉反馈 ------------------------------------------------ */
+
+body.cfo-dragging {
+  user-select: none;
+  cursor: grabbing;
+}
+
+body.cfo-dragging .cfo-grip {
+  cursor: grabbing;
+}
+
+/* 插入位置指示线（position: fixed，随指针移动） */
+.cfo-indicator {
+  position: fixed;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--interactive-accent);
+  box-shadow: 0 0 0 1px var(--interactive-accent);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.nav-file.cfo-drag-item > .nav-file-title,
+.nav-folder.cfo-drag-item > .nav-folder-title,
+.nav-file.cfo-drag-item > .nav-folder-title {
+  opacity: 0.5;
+  background-color: var(--background-modifier-hover);
+  border-radius: var(--radius-s, 4px);
+  box-shadow: inset 0 0 0 1px var(--interactive-accent);
+}
+
+/* --- 小屏下把手柄收窄一点 ------------------------------------------------ */
+
+.is-phone .nav-file-title > .cfo-grip,
+.is-phone .nav-folder-title > .cfo-grip {
+  width: 18px;
+  height: 18px;
+  margin-inline-end: 2px;
+}

@@ -1,0 +1,12 @@
+# 运行时数据（插件自己生成，不随源码分发）
+data.json
+.cfo-debug.json
+
+# 依赖与缓存
+node_modules/
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
