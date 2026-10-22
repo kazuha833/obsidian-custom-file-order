@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "minAppVersion": "1.4.0",
   "description": "在文件浏览器里用拖拽或右键菜单自定义文件与文件夹的排列顺序，顺序按文件夹保存。",
-  "author": "Obsidian 用户",
+  "author": "Cyn",
+  "authorUrl": "https://github.com/kazuha833",
   "isDesktopOnly": false
 }
